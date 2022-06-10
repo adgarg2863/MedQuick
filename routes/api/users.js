@@ -1,65 +1,28 @@
 const express = require("express")
-const gravatar = require('gravatar')
 const bcrypt = require('bcryptjs')
 const router = express.Router()
 const jwt =  require('jsonwebtoken')
 const config = require('config')
-const { check, validationResult } = require('express-validator')
-
+const validate = require('../../middleware/validate')
+const authValidation = require('../../validations/auth.validation')
+const catchAsync = require('../../utils/catchAsync')
 const User = require('../../models/User')
 //@route Post api/users
-router.post('/', [
-    check('name', 'Name is required')
-    .not().
-    isEmpty(),
+router.post('/', validate(authValidation.register), catchAsync( async (req,res)=> {
 
-    check('email','please include an email')
-    .isEmail(),
-
-    check('password','please enter a passoword of more than length 6')
-    .isLength({min:6})
-
-], async (req,res)=> {
-
-    const errors =await validationResult(req)
-    if(!errors.isEmpty()){
-        return res.status(400).json({ errors: errors.array()})
-    }
-    //console.log(req.body)
-
-    const { name, email, password} = req.body
-
-    try{
-     // see if user exists
-
-     let user = await User.findOne({email})
-
-     if(user){
-        return res.status(400).json({ errors: [{msg:'user already exists'}] })
-     }
-
-
-    //get users gravatar
-    const avatar = gravatar.url(email, {
-        s:'200',
-        r:'pg',
-        d: 'mm'
-    })
-
-    user = new User({
-        name,
-        email,
-        avatar,
-        password
-    })
-
-
-    //encrypt password
-
+    const userBody = req.body;
+    if (await User.isEmailTaken(userBody.email)) {
+        throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
+      }
+      const address = await getAddress(userBody.latitude, userBody.longitude);
+      const userbody = {
+        ...userBody,
+        city: address.city,
+        address: address.address,
+      };
     const salt = await bcrypt.genSalt(10)
-
-    user.password = await bcrypt.hash(password, salt)
-    await user.save()
+    userbody.password = await bcrypt.hash(password, salt)
+    await User.create(userbody);
 
    
     //return jsonwebtoken
@@ -78,13 +41,9 @@ router.post('/', [
             res.json({token})
         } )
 
-    }catch(err){
-        console.log(err.message)
-       return res.status(500).send('server error')
-    }
     
    
     //res.send('user route')
-})
+}))
 
 module.exports = router
