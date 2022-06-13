@@ -11,7 +11,7 @@ import {Provider} from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
-
+import Home from './components/Home';
 if(localStorage.token){
   setAuthToken(localStorage.token);
 }
@@ -27,6 +27,7 @@ const App=()=> {
     <Router>
     <ToastContainer />
       <Routes>
+        <Route path={'/'} element={<Home />} />
         <Route path={'/auth/login'} element={<Login />} />
         <Route path={'/auth/register'} element={<Register />} />
       </Routes>

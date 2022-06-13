@@ -1,5 +1,5 @@
 const express = require('express');
-const validate = require('../../middlewares/validate');
+const validate = require('../../middleware/validate');
 const searchController = require('../../controllers/search.controller');
 const searchValidation = require('../../validations/search.validation');
 const router = express.Router();

@@ -13,6 +13,7 @@
     "awesome-debounce-promise": "^2.1.0",
     "axios": "^0.25.0",
     "formik": "^2.2.9",
+    "material-ui-phone-number": "^3.0.0",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-async-hook": "^4.0.0",

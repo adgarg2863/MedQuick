@@ -3,7 +3,7 @@ import setAuthToken from '../utils/setAuthToken';
 import { setAlert } from './alert';
 import { REGISTER_SUCCESS, REGISTER_FAIL , USER_LOADED , AUTH_ERROR ,LOGIN_FAIL , LOGIN_SUCCESS , LOGOUT , CLEAR_PROFILE} from './types';
 
-//load user
+// load user
 export const loadUser= () => async dispatch =>{
     if(localStorage.token){
         setAuthToken(localStorage.token);
@@ -25,17 +25,17 @@ export const loadUser= () => async dispatch =>{
 
 // Register user
 
-export const register = ({ name , email , password}) => async dispatch => {
+export const register = (formData) => async dispatch => {
     const config ={
         headers: {
             'Content-Type': 'application/json'
         }
     }
 
-    const body = JSON.stringify({ name , email , password});
+    const body = JSON.stringify(formData);
 
     try{
-        const res= await axios.post('/auth/register' , body , config);
+        const res= await axios.post('/api/auth/register' , body , config);
         dispatch({
             type: REGISTER_SUCCESS,
             payload: res.data
@@ -67,7 +67,7 @@ export const login = ( email , password) => async dispatch => {
     const body = JSON.stringify({ email , password});
 
     try{
-        const res= await axios.post('/auth/login' , body , config);
+        const res= await axios.post('/api/auth/login' , body , config);
         dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data

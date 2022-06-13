@@ -3,7 +3,8 @@ const haversine = require('haversine-distance');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
-const { User, Medicine } = require('../models');
+const Medicine  = require("../models/Medicine");
+const User = require("../models/User");
 const getAddress = require('../utils/getAddress');
 
 const durationSort = (a, b) => {
@@ -111,8 +112,6 @@ const getAllMedicine = catchAsync(async (req, res) => {
 
 module.exports = {
   searchItem,
-  addItem,
-  deleteItem,
   itemList,
   getAllMedicine,
 };
