@@ -12,7 +12,7 @@ const rightLink = {
 };
 
 function AppBar(props) {
-  return <MuiAppBar elevation={0} position="fixed" {...props} />;
+  return <MuiAppBar elevation={0} position="fixed" {...props} style={{background: 'linear-gradient(150deg, #4341be, #23d1a8)'}}/>;
 }
 
 const Toolbar = styled(MuiToolbar)(({ theme }) => ({

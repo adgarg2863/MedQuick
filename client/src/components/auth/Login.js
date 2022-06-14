@@ -1,4 +1,4 @@
-import React,{useState ,useRef, useEffect} from 'react';
+import React,{useState ,useRef} from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -15,20 +15,19 @@ import FormHelperText from '@mui/material/FormHelperText';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Formik } from 'formik';
-import { toast } from 'react-toastify';
-import { Link ,Navigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
-import showToast from '../../utils/showToastNotification';
 import Navbar from '../helper/Navbar';
 
 const Form = styled('form')``;
 const Div = styled('div')``;
-function Login({login , isAuthenticated}) {
+function Login({login , isAuthenticated, loading}) {
+     const navigate = useNavigate();
     const formRef = useRef();
     const [showPassword, setShowPassword] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+   
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
@@ -38,7 +37,7 @@ function Login({login , isAuthenticated}) {
         event.preventDefault();
     };
     const handleRegister = () => {
-        <Navigate to='/auth/register'/>
+      navigate('/auth/register');
     };
 
     //redirect if authenticated
@@ -114,17 +113,9 @@ function Login({login , isAuthenticated}) {
                     password: values.password,
                     // rememberUser: values.rememberUser,
                   };
-                  try {
-                    setIsLoading(true);
+                  
                     login(formData.email,formData.password);
-                  } catch (e) {
-                    console.log(e);
-                    if (!e?.response?.data?.message) {
-                      showToast('ERROR', 'Error in signing you in!');
-                    }
-                  } finally {
-                    setIsLoading(false);
-                  }
+                  
                 }}
               >
                 {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
@@ -218,7 +209,7 @@ function Login({login , isAuthenticated}) {
                           variant="contained"
                           color="secondary"
                           sx={{ mt: 3, mb: 2 }}
-                          disabled={isLoading}
+                          disabled={loading}
                         >
                           Sign In
                         </Button>
@@ -238,11 +229,13 @@ function Login({login , isAuthenticated}) {
 
 Login.protoTypes={
     login: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    loading: PropTypes.bool,
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    loading: state.auth.loading
 })
 export default connect(mapStateToProps , { login })(Login);
 

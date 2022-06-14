@@ -14,12 +14,11 @@ import MenuItem from '@mui/material/MenuItem';
 import MuiPhoneNumber from 'material-ui-phone-number';
 import IconButton from '@mui/material/IconButton';
 import { Formik } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import FormHelperText from '@mui/material/FormHelperText';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import showToast from '../../utils/showToastNotification';
-import { toast } from 'react-toastify';
 import Navbar from '../helper/Navbar';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -43,12 +42,11 @@ const userTypes = [
   },
 ];
 
-function Register({register , isAuthenticated}) {
+function Register({register , isAuthenticated, loading}) {
   const navigate = useNavigate();
   const formRef = useRef();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [userType, setUserType] = useState('medical-store');
 
@@ -90,7 +88,9 @@ function Register({register , isAuthenticated}) {
   function error(err) {
     showToast('ERROR', `ERROR(${err.code}): ${err.message}`);
   }
-
+  if(isAuthenticated) {
+    return <Navigate to="/dashboard"/>
+  }
   return (
     <>
       <Navbar isLoggedIn={false} />
@@ -182,16 +182,9 @@ function Register({register , isAuthenticated}) {
                 latitude: lat,
                 longitude: long,
               };
-              try {
-                setIsLoading(true);
+              
                 register(formdata);
-              } catch (e) {
-                if (!e?.response?.data?.message) {
-                  showToast('ERROR', 'Error in creating an account!');
-                }
-              } finally {
-                setIsLoading(false);
-              }
+              
             }}
           >
             {({ values, errors, touched, setFieldValue, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
@@ -369,7 +362,7 @@ function Register({register , isAuthenticated}) {
                       variant="contained"
                       color="secondary"
                       sx={{ mt: 3, mb: 2 }}
-                      disabled={isLoading}
+                      disabled={loading}
                     >
                       Register
                     </Button>
@@ -391,10 +384,12 @@ function Register({register , isAuthenticated}) {
 
 Register.protoTypes={
     register: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    loading: PropTypes.bool,
 }
 
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    loading: state.auth.loading
 })
 export default connect(mapStateToProps , { register })(Register);

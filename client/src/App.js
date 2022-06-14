@@ -1,11 +1,10 @@
 import './App.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import { BrowserRouter as Router, Route ,Routes,Link} from 'react-router-dom';
+import { BrowserRouter as Router, Route ,Routes} from 'react-router-dom';
 import React , {useEffect} from 'react';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-import Alert from './components/layout/Alert';
 //redux
 import {Provider} from 'react-redux';
 import store from './store';
@@ -25,11 +24,12 @@ const App=()=> {
   return (
     <Provider store={store}>
     <Router>
-    <ToastContainer />
+    <ToastContainer/>
       <Routes>
         <Route path={'/'} element={<Home />} />
         <Route path={'/auth/login'} element={<Login />} />
         <Route path={'/auth/register'} element={<Register />} />
+        {/* <Route path='*' element={<NotFound />} /> */}
       </Routes>
     </Router>
     </Provider>

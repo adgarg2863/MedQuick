@@ -3,14 +3,21 @@ const bcrypt = require('bcryptjs')
 const router = express.Router()
 const jwt =  require('jsonwebtoken')
 const config = require('config')
+const httpStatus = require("http-status");
+const pick = require("../../utils/pick");
 const validate = require('../../middleware/validate')
 const authValidation = require('../../validations/auth.validation')
 const catchAsync = require('../../utils/catchAsync')
 const auth = require('../../middleware/auth')
 const User = require('../../models/User')
+const ApiError = require('../../utils/ApiError');
 //@route GET api/auth
 router.get('/',auth, catchAsync(async (req,res)=> {
         const user = await User.findById(req.user.id).select('-password')
+        if (!user) {
+            throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+          }
+    
         res.json(user)
 
 
