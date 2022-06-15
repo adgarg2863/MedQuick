@@ -4,7 +4,9 @@ import Link from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import MuiToolbar from '@mui/material/Toolbar';
-
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import {logout} from '../../actions/auth';
 const rightLink = {
   fontSize: 16,
   color: 'common.white',
@@ -22,7 +24,7 @@ const Toolbar = styled(MuiToolbar)(({ theme }) => ({
   },
 }));
 
-function Navbar({ isLoggedIn, signOut }) {
+function Navbar({ auth:{ isAuthenticated }, logout }) {
   return (
     <div>
       <AppBar position="fixed">
@@ -31,7 +33,7 @@ function Navbar({ isLoggedIn, signOut }) {
           <Link variant="h6" underline="none" color="inherit" href="/" sx={{ fontSize: 24 }}>
             {'FastMeds'}
           </Link>
-          {isLoggedIn === false ? (
+          {isAuthenticated === false ? (
             <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
               <Link color="inherit" variant="h6" underline="none" href="/auth/login" sx={rightLink}>
                 {'Sign In'}
@@ -45,8 +47,8 @@ function Navbar({ isLoggedIn, signOut }) {
               <Link color="inherit" variant="h6" underline="none" href="/inventory" sx={rightLink}>
                 {'Update Inventory'}
               </Link>
-              <Link component="button" variant="h6" underline="none" onClick={signOut} sx={rightLink}>
-                {'SignOut'}
+              <Link component="button" variant="h6" underline="none" onClick={logout} sx={rightLink}>
+                {'logout'}
               </Link>
             </Box>
           )}
@@ -57,4 +59,14 @@ function Navbar({ isLoggedIn, signOut }) {
   );
 }
 
-export default Navbar;
+Navbar.protoTypes = {
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, {logout})(
+  Navbar
+);
