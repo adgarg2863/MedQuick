@@ -11,6 +11,8 @@ import store from './store';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 import Home from './components/Home';
+
+
 if(localStorage.token){
   setAuthToken(localStorage.token);
 }
@@ -31,7 +33,7 @@ const App=()=> {
         <Route path={'/auth/register'} element={<Register />} />
         {/* <Route path='*' element={<NotFound />} /> */}
       </Routes>
-    </Router>
+  </Router>
     </Provider>
   );
 }
