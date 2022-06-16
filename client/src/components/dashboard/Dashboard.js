@@ -19,7 +19,7 @@ const Dashboard = ({
         {user === null && loading ? (
           <Spinner />
         ) :<>
-        <Sidebar index={0} style={float="left"}/>
+        <Sidebar index={0} style={{float:"left"}}/>
         <div>
 
         </div>

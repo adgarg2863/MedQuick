@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import UpdateTable from "../helper/UpdateTable";
+
 const Addmeds = () => {
   const [list, setList] = useState([]);
+  const [id, setId] = useState(0);
   const [generic, setGeneric] = useState("");
   const [med, setMed] = useState("");
   const [price, setPrice] = useState(0);
@@ -15,24 +18,31 @@ const Addmeds = () => {
     setList([
       ...list,
       {
-        generic,
-        med,
+        id,
+        genericName: generic,
+        medName: med,
         price,
         quantity,
+        itemType: 'medicine'
       },
     ]);
+    setId(id+1);
     setGeneric("");
     setMed("");
     setPrice(0);
     setQuantity(0);
   };
+
+  const deleteItem = (uid) => {
+    setList(list.filter(item => item.id !== uid));
+  }
   return (
     <>
       {console.log(list)}
       <Box
         component='form'
         sx={{
-          "& .MuiTextField-root": { m: 1, width: "25ch" },
+          "& .MuiTextField-root": {  mr:1},
         }}
         autoComplete='off'
         onSubmit={(e) => onSubmit(e)}
@@ -77,12 +87,23 @@ const Addmeds = () => {
           <Button
             type='submit'
             variant='contained'
-            sx={{ m: 1, height: "50px" }}
+            sx={{ height: "50px" }}
           >
             Add Item
           </Button>
         </div>
       </Box>
+
+      <UpdateTable rows={list} deleteItem={deleteItem}/>
+
+      {
+        list.length === 0 ? <h3>No Items</h3>:<Button
+        variant='contained'
+        sx={{mt:2, height: "50px" }}
+      >
+       Update Inventory
+      </Button>
+      }
     </>
   );
 };
