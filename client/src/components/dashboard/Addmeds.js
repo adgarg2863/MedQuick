@@ -42,7 +42,7 @@ const Addmeds = () => {
       <Box
         component='form'
         sx={{
-          "& .MuiTextField-root": {  mr:1},
+          "& .MuiTextField-root": {mt:1,  mr:1},
         }}
         autoComplete='off'
         onSubmit={(e) => onSubmit(e)}
@@ -87,7 +87,7 @@ const Addmeds = () => {
           <Button
             type='submit'
             variant='contained'
-            sx={{ height: "50px" }}
+            sx={{ height: "50px", mt:1 }}
           >
             Add Item
           </Button>

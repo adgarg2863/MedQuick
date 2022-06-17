@@ -13,7 +13,7 @@ import setAuthToken from './utils/setAuthToken';
 import Home from './components/Home';
 import Dashboard from './components/dashboard/Dashboard';
 import Additem from './components/dashboard/Additem';
-
+import Navbar from './components/helper/Navbar';
 
 if(localStorage.token){
   setAuthToken(localStorage.token);
@@ -29,6 +29,7 @@ const App=()=> {
     <Provider store={store}>
     <Router>
     <ToastContainer/>
+    <Navbar  />
       <Routes>
         <Route path={'/'} element={<Home />} />
         <Route path={'/dashboard'} element={<Dashboard />} />

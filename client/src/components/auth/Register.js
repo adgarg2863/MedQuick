@@ -93,7 +93,7 @@ function Register({register , isAuthenticated, loading}) {
   }
   return (
     <>
-      <Navbar />
+   
       <Container component="main" maxWidth="sm">
         <CssBaseline />
         <Div
