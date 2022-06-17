@@ -8,7 +8,7 @@ const User = require("../models/User");
 get profile of user
 */
 const getProfile = catchAsync(async (req, res) => {
-  const user = await User.getUserById(req.body.userId);
+  const user = await User.findById(req.body.userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, "User not found");
   }
@@ -20,15 +20,15 @@ const getProfile = catchAsync(async (req, res) => {
 */
 const addItem = catchAsync(async (req, res) => {
   // console.log(req.body);
-  const user = await User.getUserById(req.body.userId);
+  const user = await User.findById(req.user.id);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, "User not found");
   }
-  const medArray = req.body.medicines;
+  const medArray = req.body;
   const n = medArray.length;
   for (let i = 0; i < n; i += 1) {
     // console.log(i);
-    const { medName, genericName } = medArray[i];
+    const { medName, genericName,itemType } = medArray[i];
     let index = -1;
     user.inventory.forEach((item, ind) => {
       if (item.medName === medName) {
@@ -36,7 +36,7 @@ const addItem = catchAsync(async (req, res) => {
       }
     });
     if (index !== -1) {
-      user.inventory[index].quantity += medArray[i].quantity;
+      user.inventory[index].quantity += parseInt(medArray[i].quantity);
     } else {
       const newItem = pick(medArray[i], [
         "medName",
@@ -50,11 +50,11 @@ const addItem = catchAsync(async (req, res) => {
 
       const medicine = await Medicine.findOne({ name: medName });
       if (!medicine) {
-        const newMedicine = new Medicine({ name: medName });
+        const newMedicine = new Medicine({ name: medName,itemType });
         await newMedicine.save();
       }
 
-      const genMedicine = await Medicine.findOne({ name: genericName });
+      const genMedicine = await Medicine.findOne({ name: genericName, itemType });
       if (!genMedicine) {
         const newMedicine = new Medicine({ name: genericName });
         await newMedicine.save();
@@ -69,11 +69,11 @@ const addItem = catchAsync(async (req, res) => {
 @delete item
 */
 const deleteItem = catchAsync(async (req, res) => {
-  const user = await User.getUserById(req.body.userId);
+  const user = await User.findById(req.user.id);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, "User not found");
   }
-  const medArray = req.body.medicines;
+  const medArray = req.body;
   const n = medArray.length;
   for (let i = 0; i < n; i += 1) {
     const { medName, genericName } = medArray[i];
@@ -84,8 +84,8 @@ const deleteItem = catchAsync(async (req, res) => {
       }
     });
     if (index !== -1) {
-      if (user.inventory[index].quantity >= medArray[i].quantity)
-        user.inventory[index].quantity -= medArray[i].quantity;
+      if (user.inventory[index].quantity >= parseInt(medArray[i].quantity))
+        user.inventory[index].quantity -= parseInt(medArray[i].quantity);
       else
         throw new ApiError(
           httpStatus.NOT_FOUND,

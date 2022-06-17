@@ -3,8 +3,10 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import UpdateTable from "../helper/UpdateTable";
-
-const Addmeds = () => {
+import { updateItems } from "../../actions/item";
+import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+const Addmeds = ({updateItems}) => {
   const [list, setList] = useState([]);
   const [id, setId] = useState(0);
   const [generic, setGeneric] = useState("");
@@ -33,12 +35,24 @@ const Addmeds = () => {
     setQuantity(0);
   };
 
+  const updateInventory = async (e) => {
+    e.preventDefault()
+   
+    updateItems(list);
+    setId(0);
+    setGeneric("");
+    setMed("");
+    setPrice(0);
+    setQuantity(0);
+    setList([]);
+  }
+
   const deleteItem = (uid) => {
     setList(list.filter(item => item.id !== uid));
   }
   return (
     <>
-      {console.log(list)}
+     
       <Box
         component='form'
         sx={{
@@ -100,6 +114,7 @@ const Addmeds = () => {
         list.length === 0 ? <h3>No Items</h3>:<Button
         variant='contained'
         sx={{mt:2, height: "50px" }}
+        onClick={(e)=> updateInventory(e)}
       >
        Update Inventory
       </Button>
@@ -108,4 +123,10 @@ const Addmeds = () => {
   );
 };
 
-export default Addmeds;
+Addmeds.protoTypes={
+  updateItems: PropTypes.func.isRequired,
+  
+}
+
+
+export default connect(null , { updateItems })(Addmeds);

@@ -29,7 +29,7 @@ const App=()=> {
     <Provider store={store}>
     <Router>
     <ToastContainer/>
-    <Navbar  />
+    <Navbar/>
       <Routes>
         <Route path={'/'} element={<Home />} />
         <Route path={'/dashboard'} element={<Dashboard />} />
