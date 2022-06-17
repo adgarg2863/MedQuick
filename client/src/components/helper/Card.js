@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Card = ({ store, ...props }) => {
+const Card = ({ store }) => {
+  console.log(store);
   return (
     <div className="card mb-3" style={{ minWidth: '75%' }}>
       <div className="row g-0">
