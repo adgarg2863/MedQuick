@@ -14,6 +14,7 @@ import Home from './components/Home';
 import Dashboard from './components/dashboard/Dashboard';
 import Additem from './components/dashboard/Additem';
 import Navbar from './components/helper/Navbar';
+import Removeitem from './components/dashboard/Removeitem';
 
 if(localStorage.token){
   setAuthToken(localStorage.token);
@@ -34,6 +35,7 @@ const App=()=> {
         <Route path={'/'} element={<Home />} />
         <Route path={'/dashboard'} element={<Dashboard />} />
         <Route path={'/dashboard/additem'} element={<Additem/>} />
+        <Route path={'/dashboard/removeitem'} element={<Removeitem/>} />
         <Route path={'/auth/login'} element={<Login />} />
         <Route path={'/auth/register'} element={<Register />} />
         {/* <Route path='*' element={<NotFound />} /> */}
