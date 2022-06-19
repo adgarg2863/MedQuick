@@ -1,80 +1,20 @@
 import React from 'react'
-// import './App.css'
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
+import Removemeds from './Removemeds';
 
-function Removeitem() {
-  // note: the id field is mandatory
-  const items = [
-    {
-      id: 0,
-      name: 'Cobol'
-    },
-    {
-      id: 1,
-      name: 'JavaScript'
-    },
-    {
-      id: 2,
-      name: 'Basic'
-    },
-    {
-      id: 3,
-      name: 'PHP'
-    },
-    {
-      id: 4,
-      name: 'Java'
-    }
-  ]
-
-  const handleOnSearch = (string, results) => {
-    // onSearch will have as the first callback parameter
-    // the string searched and for the second the results.
-    console.log(string, results)
-  }
-
-  const handleOnHover = (result) => {
-    // the item hovered
-    console.log(result)
-  }
-
-  const handleOnSelect = (item) => {
-    // the item selected
-    console.log(item)
-  }
-
-  const handleOnFocus = () => {
-    console.log('Focused')
-  }
-
-  const formatResult = (item) => {
-    return (
-      <>
-        <span style={{ display: 'block', textAlign: 'left' }}>id: {item.id}</span>
-        <span style={{ display: 'block', textAlign: 'left' }}>name: {item.name}</span>
-      </>
-    )
-  }
-
+const Removeitem = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <div style={{ width: 400 }}>
-          <ReactSearchAutocomplete
-            items={items}
-            onSearch={handleOnSearch}
-            onHover={handleOnHover}
-            onSelect={handleOnSelect}
-            onFocus={handleOnFocus}
-            autoFocus
-            formatResult={formatResult}
-            fuseOptions={{ keys: ["name"] }}
-            resultStringKeyName="name"
-          />
-        </div>
-      </header>
-    </div>
-  )
+  <>
+     
+          <Container component="main" maxWidth="lg">
+          <CssBaseline />
+            <h1>Bill/Remove Items</h1>
+              <Removemeds/>
+          </Container>
+         
+    
+    </>)
 }
 
 export default Removeitem

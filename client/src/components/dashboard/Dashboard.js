@@ -1,21 +1,20 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { Link, Outlet } from "react-router-dom";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
-import { useNavigate, Navigate } from 'react-router-dom';
+import {  Navigate } from 'react-router-dom';
 import ProfileCard from '../helper/ProfileCard';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 const Dashboard = ({
   auth: { user, isAuthenticated , loading},
 }) => {
-    if(!isAuthenticated){
+    if(!loading && !isAuthenticated){
         return  <Navigate to='/auth/login'/>
     }
   return (
     <Fragment>
-        {user === null && loading ? (
+        {user === null || loading ? (
           <Spinner />
         ) :<>
         <div>

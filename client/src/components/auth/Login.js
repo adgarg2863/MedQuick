@@ -19,7 +19,6 @@ import { useNavigate, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
-import Navbar from '../helper/Navbar';
 
 const Form = styled('form')``;
 const Div = styled('div')``;

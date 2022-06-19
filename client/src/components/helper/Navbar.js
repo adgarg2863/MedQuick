@@ -1,22 +1,17 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Link from "@mui/material/Link";
+import { Link } from 'react-router-dom'
 import { styled } from "@mui/material/styles";
 import MuiAppBar from "@mui/material/AppBar";
 import MuiToolbar from "@mui/material/Toolbar";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
-import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import {  useState } from "react";
+import { ProSidebar, Menu, MenuItem} from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
-import { FaHeart, FaGem, FaBars } from "react-icons/fa";
-const rightLink = {
-  fontSize: 16,
-  color: "common.white",
-  ml: 3,
-};
+import { FaGem, FaBars } from "react-icons/fa";
+import { Button } from "@mui/material";
 
 function AppBar(props) {
   return (
@@ -68,45 +63,38 @@ function Navbar({ auth: { isAuthenticated }, logout }) {
           <Box sx={{ flex: 1 }} />
 
           <Link
-            variant='h6'
-            underline='none'
-            color='inherit'
-            href='/'
-            sx={{ fontSize: 24 }}
+            
+            to='/'
+           
           >
             {"FastMeds"}
           </Link>
           {isAuthenticated === false ? (
             <Box sx={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
               <Link
-                color='inherit'
-                variant='h6'
-                underline='none'
-                href='/auth/login'
-                sx={rightLink}
+               
+                to='/auth/login'
+                
               >
                 {"Sign In"}
               </Link>
               <Link
-                variant='h6'
-                underline='none'
-                href='/auth/register'
-                sx={rightLink}
+               
+                to='/auth/register'
+             
               >
                 {"Sign Up"}
               </Link>
             </Box>
           ) : (
             <Box sx={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
-              <Link
-                component='button'
-                variant='h6'
-                underline='none'
+              <Button
+               
                 onClick={logout}
-                sx={rightLink}
+                
               >
                 {"logout"}
-              </Link>
+              </Button>
             </Box>
           )}
         </Toolbar>
@@ -123,11 +111,11 @@ function Navbar({ auth: { isAuthenticated }, logout }) {
             <Link to="/dashboard/removeitem"></Link>
             <Link to="/dashboard/showinventory"></Link> */}
             <MenuItem icon={<FaGem />}>
-              <Link href='/dashboard' >Dashboard</Link>
+              <Link to='/dashboard' >Dashboard</Link>
             </MenuItem>
-            <MenuItem icon={<FaGem />}><Link href='/dashboard/additem' >Add Items</Link></MenuItem>
-            <MenuItem icon={<FaGem />}><Link href='/dashboard/removeitem' >Bill/Remove Items</Link></MenuItem>
-            <MenuItem icon={<FaGem />}><Link href='/dashboard/viewinventory' >View Inventory</Link></MenuItem>
+            <MenuItem icon={<FaGem />}><Link to='/dashboard/additem' >Add Items</Link></MenuItem>
+            <MenuItem icon={<FaGem />}><Link to='/dashboard/removeitem' >Bill/Remove Items</Link></MenuItem>
+            <MenuItem icon={<FaGem />}><Link to='/dashboard/viewinventory' >View Inventory</Link></MenuItem>
             {/* <SubMenu title="Components" icon={<FaHeart />}>
               <MenuItem>Component 1</MenuItem>
               <MenuItem>Component 2</MenuItem>

@@ -76,10 +76,10 @@ const deleteItem = catchAsync(async (req, res) => {
   const medArray = req.body;
   const n = medArray.length;
   for (let i = 0; i < n; i += 1) {
-    const { medName, genericName } = medArray[i];
+    const { medName, id } = medArray[i];
     let index = -1;
     user.inventory.forEach((item, ind) => {
-      if (item.medName === medName) {
+      if (item._id.toString() === id ) {
         index = ind;
       }
     });

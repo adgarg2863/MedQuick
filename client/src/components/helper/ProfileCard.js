@@ -1,13 +1,12 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import { CardActionArea } from '@mui/material';
 import {FaPhone,FaEnvelope,FaMapMarkerAlt} from 'react-icons/fa';
 export default function MultiActionAreaCard({user}) {
   return (
-    <Card sx={{ maxWidth: 700 }} style={{margin:"auto"}}>
+   user &&  <Card sx={{ maxWidth: 700 }} style={{margin:"auto"}}>
       <CardActionArea>
         {/* <CardMedia
           component="img"
