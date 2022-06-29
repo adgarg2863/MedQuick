@@ -48,17 +48,20 @@ const addItem = catchAsync(async (req, res) => {
       newItem.generic = medName === genericName;
       user.inventory.push(newItem);
 
-      const medicine = await Medicine.findOne({ name: medName });
-      if (!medicine) {
-        const newMedicine = new Medicine({ name: medName,itemType });
-        await newMedicine.save();
+      if(itemType=="medicine"){
+        const medicine = await Medicine.findOne({ name: medName });
+        if (!medicine) {
+          const newMedicine = new Medicine({ name: medName,itemType });
+          await newMedicine.save();
+        }
+  
+        const genMedicine = await Medicine.findOne({ name: genericName, itemType });
+        if (!genMedicine) {
+          const newMedicine = new Medicine({ name: genericName });
+          await newMedicine.save();
+        }
       }
 
-      const genMedicine = await Medicine.findOne({ name: genericName, itemType });
-      if (!genMedicine) {
-        const newMedicine = new Medicine({ name: genericName });
-        await newMedicine.save();
-      }
     }
   }
   await user.save();

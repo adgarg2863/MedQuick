@@ -114,6 +114,7 @@ function Navbar({ auth: { isAuthenticated }, logout }) {
               <Link to='/dashboard' >Dashboard</Link>
             </MenuItem>
             <MenuItem icon={<FaGem />}><Link to='/dashboard/additem' >Add Items</Link></MenuItem>
+            <MenuItem icon={<FaGem />}><Link to='/dashboard/addbed' >Add Beds</Link></MenuItem>
             <MenuItem icon={<FaGem />}><Link to='/dashboard/removeitem' >Bill/Remove Items</Link></MenuItem>
             <MenuItem icon={<FaGem />}><Link to='/dashboard/viewinventory' >View Inventory</Link></MenuItem>
             {/* <SubMenu title="Components" icon={<FaHeart />}>
