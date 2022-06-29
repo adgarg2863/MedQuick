@@ -17,6 +17,7 @@ import Navbar from './components/helper/Navbar';
 import Removeitem from './components/dashboard/Removeitem';
 import Addbeditem from './components/dashboard/Addbeditem';
 import Removebeditem from './components/dashboard/Removebeditem';
+import AllocatedBeds from './components/dashboard/AllocatedBeds';
 
 if(localStorage.token){
   setAuthToken(localStorage.token);
@@ -40,6 +41,7 @@ const App=()=> {
         <Route path={'/dashboard/addbed'} element={<Addbeditem/>} />
         <Route path={'/dashboard/removeitem'} element={<Removeitem/>} />
         <Route path={'/dashboard/removebed'} element={<Removebeditem/>} />
+        <Route path={'/dashboard/allocatedbeds'} element={<AllocatedBeds/>} />
         <Route path={'/auth/login'} element={<Login />} />
         <Route path={'/auth/register'} element={<Register />} />
         {/* <Route path='*' element={<NotFound />} /> */}

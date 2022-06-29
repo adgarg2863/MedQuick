@@ -72,7 +72,7 @@ function Navbar({ auth: { isAuthenticated }, logout }) {
           {isAuthenticated === false ? (
             <Box sx={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
               <Link
-               
+                style={{marginRight:"10px"}}
                 to='/auth/login'
                 
               >
@@ -115,7 +115,9 @@ function Navbar({ auth: { isAuthenticated }, logout }) {
             </MenuItem>
             <MenuItem icon={<FaGem />}><Link to='/dashboard/additem' >Add Items</Link></MenuItem>
             <MenuItem icon={<FaGem />}><Link to='/dashboard/addbed' >Add Beds</Link></MenuItem>
+            <MenuItem icon={<FaGem />}><Link to='/dashboard/allocatedbeds' >Allocated Beds</Link></MenuItem>
             <MenuItem icon={<FaGem />}><Link to='/dashboard/removeitem' >Bill/Remove Items</Link></MenuItem>
+            <MenuItem icon={<FaGem />}><Link to='/dashboard/removeitem' >Bill/Remove Beds</Link></MenuItem>
             <MenuItem icon={<FaGem />}><Link to='/dashboard/viewinventory' >View Inventory</Link></MenuItem>
             {/* <SubMenu title="Components" icon={<FaHeart />}>
               <MenuItem>Component 1</MenuItem>
