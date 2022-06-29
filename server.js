@@ -2,6 +2,7 @@ const express = require('express')
 const connectDB = require('./config/db')
 const { errorConverter, errorHandler } = require('./middleware/error');
 const ApiError = require('./utils/ApiError');
+const httpStatus = require('http-status')
 const app = express()
 
 //connect database
