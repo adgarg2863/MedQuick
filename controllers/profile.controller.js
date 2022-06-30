@@ -57,7 +57,7 @@ const addItem = catchAsync(async (req, res) => {
   
         const genMedicine = await Medicine.findOne({ name: genericName, itemType });
         if (!genMedicine) {
-          const newMedicine = new Medicine({ name: genericName });
+          const newMedicine = new Medicine({ name: genericName , itemType });
           await newMedicine.save();
         }
       }
