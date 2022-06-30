@@ -30,7 +30,7 @@ const errorHandler = (err, req, res, next) => {
     ...( { stack: err.stack }),
   };
 
-
+  logger.error(err);
   res.status(statusCode).send(response);
 };
 
