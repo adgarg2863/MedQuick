@@ -31,7 +31,7 @@ const Toolbar = styled(MuiToolbar)(({ theme }) => ({
   },
 }));
 
-function Navbar({ auth: { isAuthenticated }, logout }) {
+function Navbar({ auth: { isAuthenticated , type }, logout }) {
   const [toggled, setToggled] = useState(false);
   const handleToggleSidebar = (value) => {
     setToggled(value);
@@ -111,12 +111,12 @@ function Navbar({ auth: { isAuthenticated }, logout }) {
             <MenuItem icon={<FaGem />}>
               <Link to='/dashboard' >Dashboard</Link>
             </MenuItem>
-            <MenuItem icon={<FaGem />}><Link to='/dashboard/additem' >Add Items</Link></MenuItem>
-            <MenuItem icon={<FaGem />}><Link to='/dashboard/addbed' >Add Beds</Link></MenuItem>
-            <MenuItem icon={<FaGem />}><Link to='/dashboard/allocatedbeds' >Allocated Beds</Link></MenuItem>
-            <MenuItem icon={<FaGem />}><Link to='/dashboard/allocatedmeds' >Allocated Meds</Link></MenuItem>
-            <MenuItem icon={<FaGem />}><Link to='/dashboard/removeitem' >Bill/Remove Items</Link></MenuItem>
-            <MenuItem icon={<FaGem />}><Link to='/dashboard/removebed' >Bill/Remove Beds</Link></MenuItem>
+            {type && type!=="hospital" && <MenuItem icon={<FaGem />}><Link to='/dashboard/additem' >Add Items</Link></MenuItem>}
+            {type && type==="hospital" && <MenuItem icon={<FaGem />}><Link to='/dashboard/addbed' >Add Beds</Link></MenuItem>}
+            {type && type==="hospital" && <MenuItem icon={<FaGem />}><Link to='/dashboard/allocatedbeds' >Allocated Beds</Link></MenuItem>}
+            {type && type!=="hospital" && <MenuItem icon={<FaGem />}><Link to='/dashboard/allocatedmeds' >Allocated Meds</Link></MenuItem>}
+            {type && type!=="hospital" && <MenuItem icon={<FaGem />}><Link to='/dashboard/removeitem' >Bill/Remove Items</Link></MenuItem>}
+            {type && type==="hospital" && <MenuItem icon={<FaGem />}><Link to='/dashboard/removebed' >Bill/Remove Beds</Link></MenuItem>}
             <MenuItem icon={<FaGem />}><Link to='/dashboard/viewinventory' >View Inventory</Link></MenuItem>
            
           </Menu>
