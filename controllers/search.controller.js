@@ -25,6 +25,7 @@ const searchItem = catchAsync(async (req, res) => {
   const medUsers = await User.find({
     $and: [
       { city },
+      {userType: 'medical-store'},
       {
         inventory: {
           $elemMatch: {
@@ -40,6 +41,7 @@ const searchItem = catchAsync(async (req, res) => {
   const genericUsers = await User.find({
     $and: [
       { city },
+      {userType: 'medical-store'},
       {
         inventory: {
           $elemMatch: {
@@ -105,6 +107,7 @@ const searchBed = catchAsync(async (req, res) => {
   const users = await User.find({
     $and: [
       { city },
+      {userType: 'hospital'},
       {
         inventory: {
           $elemMatch: {

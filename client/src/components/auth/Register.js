@@ -34,11 +34,7 @@ const userTypes = [
   {
     value: 'hospital',
     label: 'Hospital',
-  },
-  {
-    value: 'blood-bank',
-    label: 'Blood Bank',
-  },
+  }
 ];
 
 function Register({register , isAuthenticated, loading}) {

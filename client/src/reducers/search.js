@@ -1,9 +1,9 @@
-import { GET_LIST , GET_STORES} from "../actions/types";
+import { GET_LIST } from "../actions/types";
 
 const initialState= {
     
+    loading: true,
     medicines: [],
-    stores:[]
 }
 
 function search (state = initialState , action){
@@ -12,13 +12,10 @@ function search (state = initialState , action){
         case GET_LIST :
             return {
                 ...state,
+                loading:false,
                 medicines: payload
             }
-        case GET_STORES :
-            return {
-                ...state,
-                stores: payload
-            }
+       
         default:
             return state;
     }
