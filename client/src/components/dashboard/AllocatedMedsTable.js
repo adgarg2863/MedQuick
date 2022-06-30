@@ -30,27 +30,31 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
-export default function InventoryMedTable({rows}) {
+export default function UpdateBedTable({rows}) {
   return (
     <TableContainer component={Paper} sx={{mt:2}}>
       <Table sx={{ minWidth: 700}} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Medicine Name</StyledTableCell>
-            <StyledTableCell>Generic Name</StyledTableCell>
-            <StyledTableCell align="right">Quantity</StyledTableCell>
-            <StyledTableCell align="right">Price</StyledTableCell>
+          <StyledTableCell>ID</StyledTableCell>
+            <StyledTableCell>Buyer Name</StyledTableCell>
+            <StyledTableCell align="right">Items</StyledTableCell>
+            <StyledTableCell align="right">Date</StyledTableCell>
+            <StyledTableCell align="right">Amount</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <StyledTableRow key={row._id}>
-              <StyledTableCell component="th" scope="row">
-                {row.medName}
+               <StyledTableCell component="th" scope="row">
+                {row._id}
               </StyledTableCell>
-              <StyledTableCell>{row.genericName}</StyledTableCell>
-              <StyledTableCell align="right">{row.quantity}</StyledTableCell>
-              <StyledTableCell align="right">{row.price}</StyledTableCell>
+              <StyledTableCell component="th" scope="row">
+                {row.name}
+              </StyledTableCell>
+              <StyledTableCell align="right">{row.item}</StyledTableCell>
+              <StyledTableCell align="right">{row.date}</StyledTableCell>
+              <StyledTableCell align="right">{row.amount}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

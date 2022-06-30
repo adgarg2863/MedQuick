@@ -18,7 +18,10 @@ import Removeitem from './components/dashboard/Removeitem';
 import Addbeditem from './components/dashboard/Addbeditem';
 import Removebeditem from './components/dashboard/Removebeditem';
 import AllocatedBeds from './components/dashboard/AllocatedBeds';
+import AllocatedMeds from './components/dashboard/AllocatedMeds';
 import Inventory from './components/dashboard/Inventory';
+import PrivateRoute from './components/routing/PrivateRoute';
+import NotFound from './components/layout/NotFound'
 if(localStorage.token){
   setAuthToken(localStorage.token);
 }
@@ -36,16 +39,46 @@ const App=()=> {
     <Navbar/>
       <Routes>
         <Route path={'/'} element={<Home />} />
-        <Route path={'/dashboard'} element={<Dashboard />} />
-        <Route path={'/dashboard/additem'} element={<Additem/>} />
-        <Route path={'/dashboard/addbed'} element={<Addbeditem/>} />
-        <Route path={'/dashboard/removeitem'} element={<Removeitem/>} />
-        <Route path={'/dashboard/removebed'} element={<Removebeditem/>} />
-        <Route path={'/dashboard/allocatedbeds'} element={<AllocatedBeds/>} />
-        <Route path={'/dashboard/viewinventory'} element={<Inventory/>} />
+      
+        <Route path={'/dashboard'} element={
+          <PrivateRoute><Dashboard /> </PrivateRoute>} />
+       
+
+       
+        <Route path={'/dashboard/viewinventory'} element={ <PrivateRoute>
+          <Inventory/> </PrivateRoute> } />
+       
+       
+    
+        <Route path={'/dashboard/addbed'} element={    <PrivateRoute>
+          <Addbeditem/> </PrivateRoute> } />
+       
+       
+        <Route path={'/dashboard/removebed'} element={ <PrivateRoute>
+          <Removebeditem/> </PrivateRoute> } />
+       
+       
+        <Route path={'/dashboard/allocatedbeds'} element={ <PrivateRoute>
+          <AllocatedBeds/> </PrivateRoute> } />
+       
+
+       
+        <Route path={'/dashboard/additem'} element={ <PrivateRoute>
+          <Additem/> </PrivateRoute> } />
+       
+      
+        <Route path={'/dashboard/removeitem'} element={  <PrivateRoute>
+          <Removeitem/>    </PrivateRoute> } />
+    
+       
+        <Route path={'/dashboard/allocatedmeds'} element={ <PrivateRoute>
+          <AllocatedMeds/> </PrivateRoute> } />
+       
+      
+       
         <Route path={'/auth/login'} element={<Login />} />
         <Route path={'/auth/register'} element={<Register />} />
-        {/* <Route path='*' element={<NotFound />} /> */}
+        <Route path='*' element={<NotFound />} />
       </Routes>
   </Router>
     </Provider>

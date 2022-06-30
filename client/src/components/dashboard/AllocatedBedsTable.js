@@ -38,21 +38,27 @@ export default function UpdateBedTable({rows, freeBed}) {
       <Table sx={{ minWidth: 700}} aria-label="customized table">
         <TableHead>
           <TableRow>
+          <StyledTableCell>ID</StyledTableCell>
             <StyledTableCell>Patient Name</StyledTableCell>
             <StyledTableCell align="right">Bed Type</StyledTableCell>
-            <StyledTableCell align="right">Price</StyledTableCell>
+            <StyledTableCell align="right">Date</StyledTableCell>
+            <StyledTableCell align="right">Amount</StyledTableCell>
             <StyledTableCell align="right">Free Bed</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <StyledTableRow key={row.id}>
-              <StyledTableCell component="th" scope="row">
-                {row.patientName}
+            <StyledTableRow key={row._id}>
+               <StyledTableCell component="th" scope="row">
+                {row._id}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.bedType}</StyledTableCell>
-              <StyledTableCell align="right">{row.price}</StyledTableCell>
-              <StyledTableCell align="right">  <IconButton style={{marginTop:"-1rem", marginBottom:"-1rem"}} onClick={e=> freeBed(row.id)}>
+              <StyledTableCell component="th" scope="row">
+                {row.name}
+              </StyledTableCell>
+              <StyledTableCell align="right">{row.item}</StyledTableCell>
+              <StyledTableCell align="right">{row.date}</StyledTableCell>
+              <StyledTableCell align="right">{row.amount}</StyledTableCell>
+              <StyledTableCell align="right">  <IconButton style={{marginTop:"-1rem", marginBottom:"-1rem"}} onClick={e=> freeBed(row._id,row.item)}>
               <DeleteIcon />
       </IconButton></StyledTableCell>
             </StyledTableRow>

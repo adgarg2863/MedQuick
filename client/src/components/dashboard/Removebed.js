@@ -11,7 +11,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import { deleteBed } from "../../actions/item";
 const RemoveBed = ({
-  auth: { user, isAuthenticated, loading },
+
   deleteBed,
 }) => {
   const [patient, setPatient] = useState("");
@@ -82,7 +82,7 @@ const RemoveBed = ({
           />
             <Button
                 variant='contained'
-                sx={{ mt: 2, height: "50px" }}
+                sx={{ mt: 1, height: "50px" }}
                 type="submit"
                 disabled={med === "" || patient===""}
             >
@@ -95,12 +95,9 @@ const RemoveBed = ({
 };
 
 RemoveBed.protoTypes = {
-  auth: PropTypes.object.isRequired,
   deleteBed: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
 
-export default connect(mapStateToProps, { deleteBed })(RemoveBed);
+
+export default connect(null, { deleteBed })(RemoveBed);

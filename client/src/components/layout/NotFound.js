@@ -1,14 +1,14 @@
 import React from 'react';
-
+import Container from '@mui/material/Container';
+import CssBaseline from '@mui/material/CssBaseline';
 const NotFound = () => {
   return (
       <>
-        <section className='container'>
-      <h1 className='x-large text-primary'>
-          <i className='fas fa-exclamation-triangle' />Page Not Found
-      </h1>
-      <p className='large'>Sorry , this page does not exist</p>
-      </section>
+       <Container component="main" maxWidth="lg">
+          <CssBaseline />
+            <h1>Sorry! This page does not exist.</h1>
+              
+          </Container>
       </>
   );
 };

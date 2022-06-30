@@ -10,6 +10,7 @@ import UpdateBedTable from "../helper/UpdateBedTable";
 import { updateItems } from "../../actions/item";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
 const Addbed = ({ updateItems }) => {
   const [list, setList] = useState([]);
   const [id, setId] = useState(0);
@@ -53,6 +54,8 @@ const Addbed = ({ updateItems }) => {
   const deleteItem = (uid) => {
     setList(list.filter((item) => item.id !== uid));
   };
+
+ 
   return (
     <>
       <Box

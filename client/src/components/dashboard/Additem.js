@@ -2,8 +2,14 @@ import React from 'react'
 import Addmeds from './Addmeds'
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
-
-const Additem = () => {
+import {  Navigate } from 'react-router-dom';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+const Additem = ({auth:{type}}) => {
+  if(type && type==="hospital")
+  {
+    return  <Navigate to='/dashboard'/>
+  }
   return (
   <>
      
@@ -16,5 +22,12 @@ const Additem = () => {
     
     </>)
 }
+Additem.protoTypes = {
+  auth: PropTypes.object.isRequired,
+};
 
-export default Additem
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(Additem);

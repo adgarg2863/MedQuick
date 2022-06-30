@@ -2,8 +2,14 @@ import React from 'react'
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Removemeds from './Removemeds';
-
-const Removeitem = () => {
+import {  Navigate } from 'react-router-dom';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+const Removeitem = ({auth:{type}}) => {
+  if(type && type==="hospital")
+  {
+    return  <Navigate to='/dashboard'/>
+  }
   return (
   <>
      
@@ -17,4 +23,12 @@ const Removeitem = () => {
     </>)
 }
 
-export default Removeitem
+Removeitem.protoTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(Removeitem);

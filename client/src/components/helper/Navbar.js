@@ -107,22 +107,18 @@ function Navbar({ auth: { isAuthenticated }, logout }) {
           breakPoint='xxl'
         >
           <Menu iconShape='square'>
-            {/* <Link to="/dashboard/additem"></Link>
-            <Link to="/dashboard/removeitem"></Link>
-            <Link to="/dashboard/showinventory"></Link> */}
+          
             <MenuItem icon={<FaGem />}>
               <Link to='/dashboard' >Dashboard</Link>
             </MenuItem>
             <MenuItem icon={<FaGem />}><Link to='/dashboard/additem' >Add Items</Link></MenuItem>
             <MenuItem icon={<FaGem />}><Link to='/dashboard/addbed' >Add Beds</Link></MenuItem>
             <MenuItem icon={<FaGem />}><Link to='/dashboard/allocatedbeds' >Allocated Beds</Link></MenuItem>
+            <MenuItem icon={<FaGem />}><Link to='/dashboard/allocatedmeds' >Allocated Meds</Link></MenuItem>
             <MenuItem icon={<FaGem />}><Link to='/dashboard/removeitem' >Bill/Remove Items</Link></MenuItem>
             <MenuItem icon={<FaGem />}><Link to='/dashboard/removebed' >Bill/Remove Beds</Link></MenuItem>
             <MenuItem icon={<FaGem />}><Link to='/dashboard/viewinventory' >View Inventory</Link></MenuItem>
-            {/* <SubMenu title="Components" icon={<FaHeart />}>
-              <MenuItem>Component 1</MenuItem>
-              <MenuItem>Component 2</MenuItem>
-            </SubMenu> */}
+           
           </Menu>
         </ProSidebar>
       )}

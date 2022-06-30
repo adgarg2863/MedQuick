@@ -13,7 +13,7 @@ function Inventory({ auth: { loading, user } }) {
     user && (
       <Container component='main' maxWidth='lg'>
         <CssBaseline />
-        {user.userType == "hospital" ? (
+        {user.userType === "hospital" ? (
           <>
             <h1>Free Beds</h1>
             <InventoryBedTable rows={user.inventory} />

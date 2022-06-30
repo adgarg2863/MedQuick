@@ -3,17 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
-import AllocatedBedsTable from "./AllocatedBedsTable";
-import { freeBed } from "../../actions/item";
+import AllocatedMedsTable from "./AllocatedMedsTable";
 import { Navigate } from "react-router-dom";
-function AllocatedBeds({ auth: { user, loading, type }, freeBed }) {
-  const freeBedFunc = (id, medName) => {
-    freeBed({
-      id,
-      medName,
-    });
-  };
-  if (type && type !== "hospital") {
+function AllocatedMeds({ auth: { user, loading, type } }) {
+  if (type && type === "hospital") {
     return <Navigate to='/dashboard' />;
   }
   return (
@@ -21,15 +14,14 @@ function AllocatedBeds({ auth: { user, loading, type }, freeBed }) {
     user && (
       <Container component='main' maxWidth='lg'>
         <CssBaseline />
-        <h1>Allocated Beds</h1>
-        <AllocatedBedsTable rows={user.billings} freeBed={freeBedFunc} />
+        <h1>Allocated Meds</h1>
+        <AllocatedMedsTable rows={user.billings} />
       </Container>
     )
   );
 }
 
-AllocatedBeds.protoTypes = {
-  freeBed: PropTypes.func.isRequired,
+AllocatedMeds.protoTypes = {
   auth: PropTypes.object.isRequired,
 };
 
@@ -37,4 +29,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { freeBed })(AllocatedBeds);
+export default connect(mapStateToProps)(AllocatedMeds);
