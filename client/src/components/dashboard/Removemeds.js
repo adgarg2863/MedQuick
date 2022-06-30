@@ -40,9 +40,12 @@ const Removemeds = ({ auth: { user, isAuthenticated, loading }, deleteItems }) =
   const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [maxquantity, setMaxQuantity] = useState(0);
+  const [buyer, setBuyer] = useState("");
+  const [amount,setAmount] = useState(0);
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(med);
+    setAmount(amount+quantity*price);
     setList([
       ...list,
       {
@@ -67,11 +70,12 @@ const Removemeds = ({ auth: { user, isAuthenticated, loading }, deleteItems }) =
   const updateInventory = async (e) => {
     e.preventDefault();
 
-    deleteItems(list);
+    deleteItems({list,amount,buyer});
     setId("");
     setGeneric("");
     setMed("");
     setPrice(0);
+    setAmount(0);
     setQuantity(0);
     setMaxQuantity(0);
     setList([]);
@@ -101,8 +105,9 @@ const Removemeds = ({ auth: { user, isAuthenticated, loading }, deleteItems }) =
   const handleOnFocus = () => {
     // console.log('Focused')
   };
-  const deleteItem = (uid) => {
-    setList(list.filter(item => item.key !== uid));
+  const deleteItem = (row) => {
+    setAmount(amount-row.price*row.quantity);
+    setList(list.filter(item => item.key !== row.key));
   }
   const formatResult = (item) => {
     return (
@@ -204,14 +209,36 @@ const Removemeds = ({ auth: { user, isAuthenticated, loading }, deleteItems }) =
       {list.length === 0 ? (
         <h3>No Items</h3>
       ) : (
+        <>
+        <TextField
+        required
+        id='outlined-helperText1'
+        label='Buyer Name'
+        value={buyer}
+        sx={{ m:2, height: "40px" }}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        onChange={(e) => setBuyer(e.target.value)}
+      />
         <Button
           variant='contained'
-          sx={{ mt: 2, height: "50px" }}
+          sx={{ m: 2, height: "50px" }}
           onClick={(e) => updateInventory(e)}
+          disabled={buyer===""}
         >
           Update Inventory
         </Button>
-      )}
+        <Button
+          variant="outlined"
+          sx={{ m: 2, height: "50px" }}
+      
+       
+        >
+        Total: {amount}
+        </Button>
+       
+      </>)}
     </>
   );
 };

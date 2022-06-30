@@ -9,6 +9,14 @@ const searchItem = {
   }),
 };
 
+const searchBed = {
+  body: Joi.object().keys({
+    latitude: Joi.string().required(),
+    longitude: Joi.string().required(),
+    item: Joi.string().required(),
+  }),
+};
+
 const addMedicine = {
   body: Joi.object().keys({
     name: Joi.string().required(),
@@ -18,4 +26,5 @@ const addMedicine = {
 module.exports = {
   searchItem,
   addMedicine,
+  searchBed
 };

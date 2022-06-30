@@ -19,7 +19,7 @@ const Dashboard = ({
         ) :<>
         <div>
           {console.log(user)}
-          <Container component="main" maxWidth="lg" style={{padding:"20vh"}}>
+          <Container component="main" maxWidth="lg" sx={{mt:20}}>
           <CssBaseline />
           <ProfileCard user={user}/>
           </Container>

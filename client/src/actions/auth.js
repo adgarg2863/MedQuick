@@ -52,7 +52,7 @@ export const register = (formData) => async (dispatch) => {
   } catch (e) {
     console.log(e);
 
-    showToast("ERROR", "Error in signing you in!");
+    showToast("ERROR", e.response?.data?.msg || e.response?.data?.message);
 
     dispatch({
       type: REGISTER_FAIL,
@@ -82,7 +82,7 @@ export const login = (email, password) => async (dispatch) => {
   } catch (e) {
     console.log(e);
 
-    showToast("ERROR", "Error in signing you in!");
+    showToast("ERROR",e.response?.data?.msg || e.response?.data?.message);
 
     dispatch({
       type: LOGIN_FAIL,

@@ -21,8 +21,8 @@ const Addmeds = ({updateItems}) => {
       ...list,
       {
         id,
-        genericName: generic,
-        medName: med,
+        genericName: generic.toLowerCase(),
+        medName: med.toLowerCase(),
         price,
         quantity,
         itemType: 'medicine'

@@ -85,6 +85,28 @@ const UserSchema = new mongoose.Schema(
         price: Number,
       },
     ],
+    billings: [
+      {
+        name:{
+          type:String,
+          required:true,
+          trim:true
+        },
+        item: {
+          type: String,
+          required: true,
+          trim: true
+        },
+        date: {
+          type: Date,
+          default: Date.now()
+        },
+        amount: {
+          type: Number,
+          default: 0
+        }
+      }
+    ]
   },
 
   {

@@ -5,7 +5,6 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-import FormHelperText from "@mui/material/FormHelperText";
 import Button from "@mui/material/Button";
 import UpdateBedTable from "../helper/UpdateBedTable";
 import { updateItems } from "../../actions/item";
@@ -16,7 +15,6 @@ const Addbed = ({ updateItems }) => {
   const [id, setId] = useState(0);
   //   const [generic, setGeneric] = useState("");
   const [med, setMed] = useState("");
-  const [price, setPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
 
   const onSubmit = async (e) => {
@@ -26,9 +24,9 @@ const Addbed = ({ updateItems }) => {
       ...list,
       {
         id,
-        genericName: med,
-        medName: med,
-        price,
+        genericName: med.toLowerCase(),
+        medName: med.toLowerCase(),
+        price:0,
         quantity,
         itemType: "hospital",
       },
@@ -76,7 +74,7 @@ const Addbed = ({ updateItems }) => {
           label="Bed Type"
           onChange={(e) => setMed(e.target.value)}
         >
-            <MenuItem value='ICU'>ICU</MenuItem>
+            <MenuItem value='icu'>ICU</MenuItem>
             <MenuItem value='covid'>covid</MenuItem>
             <MenuItem value='emergency'>emergency</MenuItem>
             <MenuItem value='mango'>Mango</MenuItem>
@@ -94,17 +92,7 @@ const Addbed = ({ updateItems }) => {
               shrink: true,
             }}
           />
-          {/* <TextField
-            required
-            id='outlined-number'
-            label='Price'
-            type='number'
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          /> */}
+        
           <Button
             type='submit'
             variant='contained'

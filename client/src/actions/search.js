@@ -32,5 +32,29 @@ export const findMedicines = (formData) => async (dispatch) =>{
         })
     }catch(e){
          console.log(e)
+         showToast("ERROR",e.response?.data?.msg || e.response?.data?.message);
+
+    }
+}
+
+export const findBeds = (formData) => async (dispatch) =>{
+    const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+    
+      const body = JSON.stringify(formData);
+    
+    try{
+        const list = await axios.post('/api/search/searchBed',body,config)
+        console.log(list.data)
+        dispatch({
+            type: 'GET_STORES',
+            payload: list.data
+        })
+    }catch(e){
+         console.log(e)
+         showToast("ERROR",e.response?.data?.msg || e.response?.data?.message);
     }
 }

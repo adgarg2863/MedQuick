@@ -14,8 +14,11 @@ import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
-
-
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import { findBeds } from "../actions/search";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,10 +52,10 @@ function a11yProps(index) {
 
 
 
-const Home = ({ medicines, getAllMedicines,findMedicines }) => {
+const Home = ({ medicines, getAllMedicines,findMedicines,findBeds }) => {
   const theme = useTheme();
-  const [val, setVal] = React.useState(0);
-
+  const [val, setVal] = useState(0);
+  
   const handleChange = (event, newValue) => {
     setVal(newValue);
   };
@@ -61,14 +64,11 @@ const Home = ({ medicines, getAllMedicines,findMedicines }) => {
     setVal(index);
   };
 
-  const transitionDuration = {
-    enter: theme.transitions.duration.enteringScreen,
-    exit: theme.transitions.duration.leavingScreen,
-  };
-  const [value, setValue] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState("");
+  const [value, setValue] = useState(null);
+  const [inputValue, setInputValue] = useState("");
   const [quantity, setQuantity] = useState(0);
-  React.useEffect(() => {
+  const [med, setMed] = useState("");
+  useEffect(() => {
     getAllMedicines();
   }, [medicines, getAllMedicines]);
   if (!navigator.geolocation) showToast('ERROR', 'Please give permission to access location');
@@ -96,13 +96,23 @@ const Home = ({ medicines, getAllMedicines,findMedicines }) => {
     })
 
   }
+
+  const onSubmitBed = (e) =>{
+    e.preventDefault()
+    findBeds({
+      latitude,
+      longitude,
+      item: med
+    })
+
+  }
   return (
     <>
       <Container component='main' maxWidth='lg'>
       <Box
       sx={{
         bgcolor: 'background.paper',
-        width: 1000,
+        width: "100%",
         position: 'relative',
         minHeight: 200,
         margin: 'auto',
@@ -186,7 +196,7 @@ const Home = ({ medicines, getAllMedicines,findMedicines }) => {
             type='submit'
             variant='contained'
             sx={{ height: "50px", mt:1 }}
-            disabled={value===null || quantity == 0}
+            disabled={value===null || !quantity}
           >
             Search
           </Button>
@@ -194,7 +204,42 @@ const Home = ({ medicines, getAllMedicines,findMedicines }) => {
         </Box>
         </TabPanel>
         <TabPanel value={val} index={1} dir={theme.direction}>
-          Item Two
+        <Box
+        component='form'
+        sx={{
+          "& .MuiTextField-root": { mt: 1, mr: 1 },
+        }}
+        autoComplete='off'
+        onSubmit={(e) => onSubmitBed(e)}
+      >
+        <div>
+
+     <FormControl sx={{ m: 1, minWidth: 200 }}>
+        <InputLabel id="demo-simple-select-helper-label">Bed Type</InputLabel>
+        <Select
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          value={med}
+          label="Bed Type"
+          onChange={(e) => setMed(e.target.value)}
+        >
+            <MenuItem value='ICU'>ICU</MenuItem>
+            <MenuItem value='covid'>covid</MenuItem>
+            <MenuItem value='emergency'>emergency</MenuItem>
+            <MenuItem value='mango'>Mango</MenuItem>
+        </Select>
+      </FormControl>
+         
+          <Button
+            type='submit'
+            variant='contained'
+            sx={{ height: "50px", mt: 1 }}
+            disabled={med===""}
+          >
+            Search
+          </Button>
+        </div>
+      </Box>
         </TabPanel>
       </SwipeableViews>
      
@@ -207,9 +252,10 @@ const Home = ({ medicines, getAllMedicines,findMedicines }) => {
 Home.protoTypes = {
   getAllMedicines: PropTypes.func.isRequired,
   findMedicines: PropTypes.func.isRequired,
+  findBeds: PropTypes.func.isRequired,
   medicines: PropTypes.array,
 };
 const mapStateToProps = (state) => ({
   medicines: state.search.medicines,
 });
-export default connect(mapStateToProps, { getAllMedicines,findMedicines })(Home);
+export default connect(mapStateToProps, { getAllMedicines,findMedicines,findBeds })(Home);

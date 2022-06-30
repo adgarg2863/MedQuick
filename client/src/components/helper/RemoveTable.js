@@ -54,7 +54,7 @@ export default function UpdateTable({rows, deleteItem}) {
               <StyledTableCell>{row.genericName}</StyledTableCell>
               <StyledTableCell align="right">{row.quantity}</StyledTableCell>
               <StyledTableCell align="right">{row.price}</StyledTableCell>
-              <StyledTableCell align="right">  <IconButton style={{marginTop:"-1rem", marginBottom:"-1rem"}} onClick={e=> deleteItem(row.key)}>
+              <StyledTableCell align="right">  <IconButton style={{marginTop:"-1rem", marginBottom:"-1rem"}} onClick={e=> deleteItem(row)}>
               <DeleteIcon />
       </IconButton></StyledTableCell>
             </StyledTableRow>

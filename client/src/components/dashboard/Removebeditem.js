@@ -1,7 +1,7 @@
 import React from 'react'
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
-import Removebed from './Removebed';
+import RemoveBed from './Removebed';
 
 const Removebeditem = () => {
   return (
@@ -10,7 +10,7 @@ const Removebeditem = () => {
           <Container component="main" maxWidth="lg">
           <CssBaseline />
             <h1>Bill/Remove Beds</h1>
-              <Removebed/>
+              <RemoveBed/>
           </Container>
          
     

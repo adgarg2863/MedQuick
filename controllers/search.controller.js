@@ -95,6 +95,70 @@ const searchItem = catchAsync(async (req, res) => {
   res.send(destinations);
   // return top 10 nearest stores
 });
+const searchBed = catchAsync(async (req, res) => {
+  // location of user searching medicine
+  const lat = req.body.latitude;
+  const long = req.body.longitude;
+  const { city } = await getAddress(lat, long);
+
+  // search stores with brand name
+  const users = await User.find({
+    $and: [
+      { city },
+      {
+        inventory: {
+          $elemMatch: {
+            medName: req.body.item,
+            quantity: { $gte: 1 },
+          },
+        },
+      },
+    ],
+  }).select('-inventory');
+
+  
+
+  // if (users.length === 0) return res.send({});
+  const point1 = { lat, lng: long };
+  // now users contains list of all stores having the item
+  // let url = `https://apis.mapmyindia.com/advancedmaps/v1/b6d9e46ed31ce0f81991b40dd46611d5/distance_matrix/driving/${lat},${long}`;
+  // // url += lat + ',' + long;
+  // users.forEach((item, index) => {
+  //   url = url.concat(`;${item.latitude},${item.longitude}`);
+  //   // url += ';' + item.latitude + ',' + item.longitude;
+  // });
+  // url = url.concat('?rtype=1&region=ind');
+
+  // // calculate distance using api
+  // const { data } = await axios.get(url);
+
+  const destinations = users.map((item, index) => {
+    // const itemObject=pick(item,['_id','name','latitude','longitude','city','address','contact','email','userType']);
+    // console.log(itemObject);
+    // console.log(data.results.durations[index+1],data.results.distances[index+1]);
+    const point2 = { lat: item.latitude, lng: item.longitude };
+    const distance = haversine(point1, point2);
+    const duration = (distance * 6) / 100.0;
+    return {
+      _id: item._id,
+      name: item.name,
+      latitude: item.latitude,
+      longitude: item.longitude,
+      city: item.city,
+      address: item.address,
+      contact: item.contact,
+      email: item.email,
+      userType: item.userType,
+      duration: duration.toFixed(2),
+      distance: distance.toFixed(2),
+    };
+  });
+
+  destinations.sort(durationSort);
+  // console.log(destinations);
+  res.send(destinations);
+  // return top 10 nearest stores
+});
 
 
 const itemList = catchAsync(async (req, res) => {
@@ -114,4 +178,5 @@ module.exports = {
   searchItem,
   itemList,
   getAllMedicine,
+  searchBed
 };

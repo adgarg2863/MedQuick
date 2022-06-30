@@ -76,8 +76,10 @@ const deleteItem = catchAsync(async (req, res) => {
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, "User not found");
   }
-  const medArray = req.body;
+  const medArray = req.body.list;
   const n = medArray.length;
+  const amount = req.body.amount;
+  const buyer = req.body.buyer;
   for (let i = 0; i < n; i += 1) {
     const { medName, id } = medArray[i];
     let index = -1;
@@ -98,12 +100,79 @@ const deleteItem = catchAsync(async (req, res) => {
       throw new ApiError(httpStatus.NOT_FOUND, `Item ${medName} not found`);
     }
   }
+  user.billings.push({
+      name: buyer,
+      item: n+' Medicines',
+      amount
+
+  })
   await user.save();
   res.send(user);
 });
 
+const deleteBed = catchAsync(async (req, res) => {
+  const user = await User.findById(req.user.id);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+  }
+ 
+    const { medName, patient, price } = req.body;
+    let index = -1;
+    user.inventory.forEach((item, ind) => {
+      if (item.medName === medName ) {
+        index = ind;
+      }
+    });
+    if (index !== -1) {
+      if (user.inventory[index].quantity >= 1)
+        user.inventory[index].quantity -= 1;
+      else
+        throw new ApiError(
+          httpStatus.NOT_FOUND,
+          `Item ${medName} not in stock`
+        );
+    } else {
+      throw new ApiError(httpStatus.NOT_FOUND, `Item ${medName} not found`);
+    }
+  user.billings.push({
+    name: patient,
+    item: medName,
+    amount: price
+  })
+  await user.save();
+  res.send(user);
+});
+
+const freeBed = catchAsync(async (req, res) => {
+  const user = await User.findById(req.user.id);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+  }
+ 
+    const { id,medName } = req.body;
+    if(user.billings.filter(item => item._id.toString()===id).length === 1)
+    user.billings= user.billings.filter(item => item._id.toString()!==id)
+    else
+    throw new ApiError(httpStatus.NOT_FOUND, `Error: Patient not found`);
+    let index = -1;
+    user.inventory.forEach((item, ind) => {
+      if (item.medName === medName ) {
+        index = ind;
+      }
+    });
+    if (index !== -1) {
+        user.inventory[index].quantity += 1;
+    } else {
+      throw new ApiError(httpStatus.NOT_FOUND, `Item ${medName} not found`);
+    }
+ 
+  await user.save();
+  res.send(user);
+});
 module.exports = {
   getProfile,
   addItem,
   deleteItem,
+  deleteBed,
+  freeBed
 };

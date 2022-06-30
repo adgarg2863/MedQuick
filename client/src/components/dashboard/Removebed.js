@@ -2,7 +2,6 @@ import React, { useState } from "react";
 // import './App.css'
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -10,11 +9,10 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-import RemoveTable from "../helper/RemoveTable";
-import { deleteItems } from "../../actions/item";
-const Removemeds = ({
+import { deleteBed } from "../../actions/item";
+const RemoveBed = ({
   auth: { user, isAuthenticated, loading },
-  deleteItems,
+  deleteBed,
 }) => {
   const [patient, setPatient] = useState("");
   const [med, setMed] = useState("");
@@ -23,6 +21,11 @@ const Removemeds = ({
 
   const updateInventory = async (e) => {
     e.preventDefault();
+    deleteBed({
+      patient,
+      medName: med.toLowerCase(),
+      price,
+    })
     setPatient("");
     setMed("");
     setPrice(0);
@@ -91,13 +94,13 @@ const Removemeds = ({
   );
 };
 
-Removemeds.protoTypes = {
+RemoveBed.protoTypes = {
   auth: PropTypes.object.isRequired,
-  deleteItems: PropTypes.func.isRequired,
+  deleteBed: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { deleteItems })(Removemeds);
+export default connect(mapStateToProps, { deleteBed })(RemoveBed);
