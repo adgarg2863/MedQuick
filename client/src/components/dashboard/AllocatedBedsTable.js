@@ -12,7 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: " #3582B4",
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -32,7 +32,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
-export default function UpdateBedTable({rows, freeBed}) {
+export default function AllocatedBedsTable({rows, freeBed}) {
   return (
     <TableContainer component={Paper} sx={{mt:2}}>
       <Table sx={{ minWidth: 700}} aria-label="customized table">
@@ -63,6 +63,7 @@ export default function UpdateBedTable({rows, freeBed}) {
       </IconButton></StyledTableCell>
             </StyledTableRow>
           ))}
+          
         </TableBody>
       </Table>
     </TableContainer>

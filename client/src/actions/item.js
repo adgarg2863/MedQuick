@@ -2,7 +2,6 @@ import axios from "axios";
 import showToast from "../utils/showToastNotification";
 
 export const updateItems = (formData) => async (dispatch) => {
-  console.log(formData);
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -27,7 +26,6 @@ export const updateItems = (formData) => async (dispatch) => {
 };
 
 export const deleteItems = (formData) => async (dispatch) => {
-  console.log(formData);
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -52,7 +50,6 @@ export const deleteItems = (formData) => async (dispatch) => {
 };
 
 export const deleteBed = (formData) => async (dispatch) => {
-  console.log(formData);
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -77,7 +74,6 @@ export const deleteBed = (formData) => async (dispatch) => {
 };
 
 export const freeBed = (formData) => async (dispatch) => {
-  console.log(formData);
   const config = {
     headers: {
       "Content-Type": "application/json",

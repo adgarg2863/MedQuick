@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Map, Marker,ZoomControl } from "pigeon-maps"
-import { osm } from 'pigeon-maps/providers'
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
@@ -129,7 +127,6 @@ const Home = ({
   };
   return (
     <>
-      {console.log(1)}
       <Container component='main' maxWidth='lg'>
         <Box
           sx={{
@@ -150,8 +147,8 @@ const Home = ({
               variant='fullWidth'
               aria-label='action tabs example'
             >
-              <Tab label='Item One' {...a11yProps(0)} />
-              <Tab label='Item Two' {...a11yProps(1)} />
+              <Tab label='Search Medicine' {...a11yProps(0)} />
+              <Tab label='Search Bed' {...a11yProps(1)} />
             </Tabs>
           </AppBar>
           <SwipeableViews
@@ -160,7 +157,7 @@ const Home = ({
             onChangeIndex={handleChangeIndex}
           >
             <TabPanel value={val} index={0} dir={theme.direction}>
-              <Box
+              {medicines.length>0 && <Box
                 component='form'
                 sx={{
                   "& .MuiTextField-root": { mt: 1, mr: 1 },
@@ -218,7 +215,7 @@ const Home = ({
                     Search
                   </Button>
                 </div>
-              </Box>
+              </Box>}
             </TabPanel>
             <TabPanel value={val} index={1} dir={theme.direction}>
               <Box
@@ -271,6 +268,7 @@ const Home = ({
             {searchType && (
               <>
                 <h2>List of {searchType}</h2>
+                {stores && stores.length===0 && <h3>No {searchType} found</h3>}
                 {stores &&
                   stores.map((item) => (
                     <Card
@@ -296,11 +294,11 @@ const Home = ({
               {"Location on Map"}
             </DialogTitle>
             <DialogContent>
-           
               <DialogContentText id='alert-dialog-description'>
-                Latitude: {lat}
+                Latitude: {lat} <br />
                 Longitude: {long}
               </DialogContentText>
+              <a href={`https://www.google.com/maps/place/${lat}+${long}`} target="__blank">map</a>
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose} autoFocus>
@@ -309,11 +307,6 @@ const Home = ({
             </DialogActions>
           </Dialog>
         </div>
-        <Map  provider={osm} height={300}  defaultZoom={11}>
-                     <ZoomControl />
-                <Marker width={40} anchor={[{latitude}, {longitude}]} />
-                <Marker width={40} anchor={[{lat}, {long}]} />
-            </Map>
       </Container>
      
     </>

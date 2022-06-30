@@ -16,6 +16,7 @@ function AllocatedMeds({ auth: { user, loading, type } }) {
         <CssBaseline />
         <h1>Allocated Meds</h1>
         <AllocatedMedsTable rows={user.billings} />
+        {user.billings.length===0 && <h3>No billings done yet</h3>}
       </Container>
     )
   );

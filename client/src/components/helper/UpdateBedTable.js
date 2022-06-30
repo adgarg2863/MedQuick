@@ -12,7 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: " #3582B4",
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {

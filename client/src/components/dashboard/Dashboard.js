@@ -18,7 +18,6 @@ const Dashboard = ({
           <Spinner />
         ) :<>
         <div>
-          {console.log(user)}
           <Container component="main" maxWidth="lg" sx={{mt:20}}>
           <CssBaseline />
           <ProfileCard user={user}/>

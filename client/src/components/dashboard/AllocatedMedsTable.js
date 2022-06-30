@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: " #3582B4",
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -30,7 +30,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
-export default function UpdateBedTable({rows}) {
+export default function AllocatedMedsTable({rows}) {
   return (
     <TableContainer component={Paper} sx={{mt:2}}>
       <Table sx={{ minWidth: 700}} aria-label="customized table">

@@ -20,7 +20,6 @@ const Addbed = ({ updateItems }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(med);
     setList([
       ...list,
       {

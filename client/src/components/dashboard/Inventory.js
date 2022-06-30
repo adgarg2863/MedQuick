@@ -24,6 +24,7 @@ function Inventory({ auth: { loading, user } }) {
             <InventoryMedTable rows={user.inventory} />
           </>
         )}
+        {user.inventory.length===0 && <h3>Empty Inventory</h3>}
       </Container>
     )
   );

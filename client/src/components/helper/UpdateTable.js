@@ -12,7 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: " #3582B4",
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -36,7 +36,7 @@ export default function UpdateTable({rows, deleteItem}) {
   return (
     <TableContainer component={Paper} sx={{mt:2}}>
       <Table sx={{ minWidth: 700}} aria-label="customized table">
-        <TableHead>
+        <TableHead >
           <TableRow>
             <StyledTableCell>Medicine Name</StyledTableCell>
             <StyledTableCell>Generic Name</StyledTableCell>

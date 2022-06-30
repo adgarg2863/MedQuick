@@ -23,6 +23,7 @@ function AllocatedBeds({ auth: { user, loading, type }, freeBed }) {
         <CssBaseline />
         <h1>Allocated Beds</h1>
         <AllocatedBedsTable rows={user.billings} freeBed={freeBedFunc} />
+        {user.billings.length===0 && <h3>No beds allocated</h3>}
       </Container>
     )
   );

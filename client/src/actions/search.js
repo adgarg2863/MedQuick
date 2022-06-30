@@ -32,7 +32,6 @@ export const findMedicines = (formData) => async (dispatch) =>{
         payload: 'Medical Stores'
       })
         const list = await axios.post('/api/search/searchItem',body,config)
-        console.log(list.data)
         dispatch({
             type: 'GET_STORES',
             payload: list.data
@@ -59,7 +58,6 @@ export const findBeds = (formData) => async (dispatch) =>{
           payload: 'Hospitals'
         })
         const list = await axios.post('/api/search/searchBed',body,config)
-        console.log(list.data)
         dispatch({
             type: 'GET_STORES',
             payload: list.data

@@ -9,17 +9,17 @@ import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
 import {  useState } from "react";
 import { ProSidebar, Menu, MenuItem} from "react-pro-sidebar";
-import "react-pro-sidebar/dist/css/styles.css";
+// import "react-pro-sidebar/dist/css/styles.css";
 import { FaGem, FaBars } from "react-icons/fa";
 import { Button } from "@mui/material";
-
+import "./custom.scss"
 function AppBar(props) {
   return (
     <MuiAppBar
       elevation={0}
       position='fixed'
       {...props}
-      style={{ background: "linear-gradient(150deg, #4341be, #23d1a8)" }}
+      style={{ background: "linear-gradient(150deg, #4341be, #23d1a8)"}}
     />
   );
 }
@@ -47,7 +47,7 @@ function Navbar({ auth: { isAuthenticated , type }, logout }) {
                 cursor: "pointer",
                 width: "40px",
                 height: "40px",
-                background: "#353535",
+                background: "#2B2B2B",
                 color: "#fff",
                 textAlign: "center",
                 borderRadius: " 50%",
@@ -60,10 +60,10 @@ function Navbar({ auth: { isAuthenticated , type }, logout }) {
               <FaBars />
             </div>
           )}
-          <Box sx={{ flex: 1 }} />
+          <Box sx={{ ml:3}} />
 
           <Link
-            
+            style={{fontSize:"2rem",color:"white",}}
             to='/'
            
           >
@@ -72,14 +72,14 @@ function Navbar({ auth: { isAuthenticated , type }, logout }) {
           {isAuthenticated === false ? (
             <Box sx={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
               <Link
-                style={{marginRight:"10px"}}
+                style={{marginRight:"10px",color:"white"}}
                 to='/auth/login'
                 
               >
                 {"Sign In"}
               </Link>
               <Link
-               
+                style={{color:"white"}}
                 to='/auth/register'
              
               >
@@ -89,7 +89,7 @@ function Navbar({ auth: { isAuthenticated , type }, logout }) {
           ) : (
             <Box sx={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
               <Button
-               
+               style={{color:"white"}}
                 onClick={logout}
                 
               >
@@ -106,9 +106,9 @@ function Navbar({ auth: { isAuthenticated , type }, logout }) {
           onToggle={handleToggleSidebar}
           breakPoint='xxl'
         >
-          <Menu iconShape='square'>
+          <Menu iconShape='square' >
           
-            <MenuItem icon={<FaGem />}>
+            <MenuItem icon={<FaGem />} >
               <Link to='/dashboard' >Dashboard</Link>
             </MenuItem>
             {type && type!=="hospital" && <MenuItem icon={<FaGem />}><Link to='/dashboard/additem' >Add Items</Link></MenuItem>}
@@ -118,7 +118,6 @@ function Navbar({ auth: { isAuthenticated , type }, logout }) {
             {type && type!=="hospital" && <MenuItem icon={<FaGem />}><Link to='/dashboard/removeitem' >Bill/Remove Items</Link></MenuItem>}
             {type && type==="hospital" && <MenuItem icon={<FaGem />}><Link to='/dashboard/removebed' >Bill/Remove Beds</Link></MenuItem>}
             <MenuItem icon={<FaGem />}><Link to='/dashboard/viewinventory' >View Inventory</Link></MenuItem>
-           
           </Menu>
         </ProSidebar>
       )}
