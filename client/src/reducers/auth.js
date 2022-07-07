@@ -40,6 +40,7 @@ function auth (state = initialState , action){
                 token: null,
                 isAuthenticated: false,
                 loading: false,
+                user: null,
                 type: null
             }
         case UPDATE_INVENTORY:

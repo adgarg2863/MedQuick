@@ -25,6 +25,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import Spinner from "./layout/Spinner";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -258,10 +259,11 @@ const Home = ({
             </TabPanel>
           </SwipeableViews>
         </Box>
-
+       
         {finding ? (
           <>
             <h2>Finding {searchType}</h2>
+            <Spinner/>
           </>
         ) : (
           <>
@@ -298,7 +300,7 @@ const Home = ({
                 Latitude: {lat} <br />
                 Longitude: {long}
               </DialogContentText>
-              <a href={`https://www.google.com/maps/place/${lat}+${long}`} target="__blank">map</a>
+              <a href={`https://www.google.com/maps/place/${lat}+${long}`} target="__blank">Open Map</a>
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose} autoFocus>

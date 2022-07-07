@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@mui/material/Button';
+import {FaPhone,FaMapMarkerAlt} from 'react-icons/fa';
 const Card = ({ store,handleClickOpen }) => {
   
   return (
@@ -8,14 +9,14 @@ const Card = ({ store,handleClickOpen }) => {
         <div>
           <div className="card-body">
             <div className="d-flex flex-column flex-md-row justify-content-between">
-              <h5 className="card-title">Name: {store.name}</h5>
-              <p className="card-text">Contact: {store.contact}</p>
+              <h5 className="card-title">{store.name}</h5>
+              <p className="card-text"><FaPhone /> {store.contact}</p>
             </div>
             <p className="card-text text-start">
-              {store.address}, {store.city}
+            <FaMapMarkerAlt /> {store.address}, {store.city}
             </p>
             <Button variant="outlined" onClick={e => handleClickOpen(store.latitude, store.longitude)}>
-        Open alert dialog
+        Location On Map
       </Button>
             <div className="d-flex flex-column flex-md-row justify-content-between">
               <p className="card-text">

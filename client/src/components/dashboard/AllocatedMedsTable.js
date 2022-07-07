@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Moment from 'react-moment';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -53,7 +54,7 @@ export default function AllocatedMedsTable({rows}) {
                 {row.name}
               </StyledTableCell>
               <StyledTableCell align="right">{row.item}</StyledTableCell>
-              <StyledTableCell align="right">{row.date}</StyledTableCell>
+              <StyledTableCell align="right"><Moment format='DD/MM/YYYY'>{row.date}</Moment></StyledTableCell>
               <StyledTableCell align="right">{row.amount}</StyledTableCell>
             </StyledTableRow>
           ))}

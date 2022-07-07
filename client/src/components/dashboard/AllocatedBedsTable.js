@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import Moment from "react-moment";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: " #3582B4",
@@ -56,7 +56,7 @@ export default function AllocatedBedsTable({rows, freeBed}) {
                 {row.name}
               </StyledTableCell>
               <StyledTableCell align="right">{row.item}</StyledTableCell>
-              <StyledTableCell align="right">{row.date}</StyledTableCell>
+              <StyledTableCell align="right"><Moment format='DD/MM/YYYY'>{row.date}</Moment></StyledTableCell>
               <StyledTableCell align="right">{row.amount}</StyledTableCell>
               <StyledTableCell align="right">  <IconButton style={{marginTop:"-1rem", marginBottom:"-1rem"}} onClick={e=> freeBed(row._id,row.item)}>
               <DeleteIcon />

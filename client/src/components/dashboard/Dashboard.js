@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import Spinner from "../layout/Spinner";
 import {  Navigate } from 'react-router-dom';
 import ProfileCard from '../helper/ProfileCard';
 import Container from '@mui/material/Container';
@@ -14,16 +13,14 @@ const Dashboard = ({
     }
   return (
     <Fragment>
-        {user === null || loading ? (
-          <Spinner />
-        ) :<>
-        <div>
-          <Container component="main" maxWidth="lg" sx={{mt:20}}>
-          <CssBaseline />
+       
+        {user !== null && !loading && <>
+        <Container component="main" maxWidth="lg" sx={{mt:20}}>
+        <CssBaseline />
           <ProfileCard user={user}/>
           </Container>
-        </div>
         </>}
+      
     </Fragment>
   );
 };
