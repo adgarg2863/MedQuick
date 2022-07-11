@@ -41,7 +41,7 @@ A Hospital can
 
 ## View live App
 
-Hosted at **https://fastmeds.herokuapp.com//**
+Hosted at **https://fastmeds.herokuapp.com/**
 
 
 ## Tech Stack Used
