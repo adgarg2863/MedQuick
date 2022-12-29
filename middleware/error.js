@@ -29,7 +29,9 @@ const errorHandler = (err, req, res, next) => {
     message,
     ...( { stack: err.stack }),
   };
-
+  
+  console.log(process.env.NODE_ENV);
+  if(process.env.NODE_ENV !== 'production')
   logger.error(err);
   res.status(statusCode).send(response);
 };

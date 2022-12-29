@@ -1,12 +1,10 @@
 const axios = require('axios');
-const ApiError = require("../utils/ApiError");
-const catchAsync = require("../utils/catchAsync");
 
 const getAddress = async (lat, long) => {
   // console.log(lat,long);
   try{
     const response = await axios.get(
-      `https://apis.mapmyindia.com/advancedmaps/v1/9ae502f52c932dbb7390f1e765d4b40c/rev_geocode?lat=${lat}&lng=${long}`
+      `https://apis.mapmyindia.com/advancedmaps/v1/${process.env.GEO_API_KEY}/rev_geocode?lat=${lat}&lng=${long}`
     );
     let city = response.data.results[0].city.toLowerCase();
     if (city === '') city = response.data.results[0].state.toLowerCase();
