@@ -1,5 +1,5 @@
 
-# FastMeds - Medical Resource Finder
+# MedQuick - Medical Resource Finder
 
 A website where users can find medicines and hospital beds from the nearest locations.
 Medical stores can manage their inventory and track the sold/available medicines.
@@ -39,9 +39,6 @@ A Hospital can
 * Inventory Management features such as adding , removing items and keeping track of transactions
 * A User has to ask for the required item and quantity and a list of locations having sufficient resources in the same city is shown in distance-sorted order.
 
-## View live App
-
-Hosted at **https://fastmeds.herokuapp.com/**
 
 
 ## Tech Stack Used
@@ -69,55 +66,14 @@ Your machine should have npm and node.js installed to use it locally.
 ### Setup and Installation
 
 
-1. First fork the repo to your account.  
-   Go to the forked repo and clone it to your local machine:
 
-```sh
-git clone https://github.com/Your_Username/charityplus.git
-```
 
-This will make a copy of the code to your local machine.
-
-2. Now move to the `fastmeds` directory.
-
-```sh
-cd fastmeds
-```
-
-3. Now check the remote of your local code by:
-
-```sh
-git remote -v
-```
-
-The response should look like:
-
-```sh
-origin	https://github.com/Your_Username/fastmeds.git (fetch)
-origin	https://github.com/Your_Username/fastmeds.git (push)
-```
-
-To add upstream to remote, run:
-
-```sh
-git remote add upstream https://github.com/milan0027/fastmeds.git
-```
-
-Again run `git remote -v`, the response should look like:
-
-```sh
-origin	https://github.com/Your_Username/fastmeds.git (fetch)
-origin	https://github.com/Your_Username/fastmeds.git (push)
-upstream	https://github.com/milan0027/fastmeds (fetch)
-upstream	https://github.com/milan0027/fastmeds (push)
-```
-
-4. Once the remote is set, install all the necessary dependencies by the following command:
+1. Once the remote is set, install all the necessary dependencies by the following command:
 
 ```sh
 npm install
 ```
-5. Move to `client` folder and install all the necessary dependencies by the following command:
+2. Move to `client` folder and install all the necessary dependencies by the following command:
 
 ```sh
 cd client
@@ -125,7 +81,7 @@ npm install
 cd ..
 ```
 
-6. Create a `.env` file in the `fastmeds` directory and add the following
+3. Create a `.env` file in the `fastmeds` directory and add the following
 ```sh
 MONGODB_URL=YOUR_MONGODB_URL
 ```
